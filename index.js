@@ -1,5 +1,6 @@
 'use-strict'
 
+import 'regenerator-runtime/runtime'
 import React from 'react'
 import Web3 from 'web3'
 import { render } from 'react-dom'

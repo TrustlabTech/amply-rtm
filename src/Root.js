@@ -10,8 +10,11 @@ import {
 } from 'react-router'
 
 import Home from  './views/Home'
+import Contracts from './views/Contracts'
+
 import EIS from './libs/events/eis'
 import EDS from './libs/events/eds'
+
 import { createDID, } from './actions/eis'
 import {
   confirmOp,
@@ -20,6 +23,7 @@ import {
   tokenTransfer,
   confirmOpNeeded,
 } from './actions/eds'
+
 import {
   ACTION_CREATE_DID,
   ACTION_CONFIRM_OP,
@@ -32,7 +36,7 @@ import {
 class Root extends Component {
   constructor(props) {
     super(props)
-
+    
     this.eis = new EIS()
     this.eds = new EDS()
   }
@@ -66,6 +70,7 @@ class Root extends Component {
     return (
       <Router history={browserHistory}>
         <Route path='/' component={Home} />
+        <Route path='/contracts' component={Contracts} />
       </Router>
     )
   }

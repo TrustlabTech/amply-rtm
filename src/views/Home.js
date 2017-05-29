@@ -1,13 +1,11 @@
 'use-strict'
 
 import PropTypes from 'prop-types'
-import { Link } from 'react-router'
 import { connect } from 'react-redux'
 import React, { Component } from 'react'
-import Layout from '../common/Layout'
-import RealTimeMonitoring, { ExtendedRealTimeMonitoring } from '../components/RealTimeMonitoring'
-import { FUNDER_ADDRESS, SYSTEM_ADDRESS, ASSURANCE_ADDRESS } from '../const'
+import Layout from './common/Layout'
 import { CreateDIDEventList, } from '../components/EISEventsList'
+import { BlockNumber, TransactionsCount } from '../components/overview'
 import {
 	RecordEventList,
 	ConfirmOpEventList,
@@ -15,44 +13,14 @@ import {
 	MultiTransactEventList,
 	TokenTransferEventList,
 } from '../components/EDSEventsList'
-
-const monitoringComponentsDefaultPropTypes = {
-	eth: PropTypes.object.isRequired,
-}
-
-class BlockNumber extends RealTimeMonitoring {
-	method(props) {
-		props.eth.getBlockNumber((error, result) => {
-			this.commonCallback(error, result)
-		})
-	}
-}
-BlockNumber.propTypes = {
-	...monitoringComponentsDefaultPropTypes
-}
-
-class TransactionsCount extends ExtendedRealTimeMonitoring {
-	method(props) {
-		props.eth.getTransactionCount(this.props.address, (error, result) => {
-			if (error) !this.setState({ dataBottom: null, loading: false }) && console.log(error)
-			else this.setState({ dataBottom: result, loading: false })
-		})
-		props.eth.getBalance(this.props.address, (error, result) => {
-			this.commonCallback(error, web3.fromWei(result, 'ether').toString())
-		})
-	}
-}
-TransactionsCount.propTypes = {
-	...monitoringComponentsDefaultPropTypes,
-	address: PropTypes.string.isRequired,
-}
+import { FUNDER_ADDRESS, SYSTEM_ADDRESS, ASSURANCE_ADDRESS } from '../const'
 
 class Home extends Component {
   render() {
     return (
 			<Layout>
 				<div className="right_col" role="main">
-					<div className="row tile_count">
+					<div className="row tile_count full-height">
 						<BlockNumber eth={web3.eth} faClass='fa fa-list' title='Total Blocks' />
 						<TransactionsCount eth={web3.eth} faClass='fa fa-file-text' titleTop='Foundation' titleBottom='Transactions' address={FUNDER_ADDRESS} />
 						<TransactionsCount eth={web3.eth} faClass='fa fa-file-text' titleTop='System' titleBottom='Transactions' address={SYSTEM_ADDRESS} />
@@ -61,32 +29,32 @@ class Home extends Component {
 					<br />
 					<div className="row">
 						<CreateDIDEventList
-							title='Ethereum Identity Service'
-							description='DID Creation'
+							title='DID Creation'
+							description='Ethereum Identity Service'
 							events={this.props.eis.events.createDID.data} />
 						<RecordEventList
-							title='Ethereum Delivery Service'
-							description='Verifiable Claim Record'
+							title='Verifiable Claim Record'
+							description='Ethereum Delivery Service'
 							events={this.props.eds.events.record.data} />
 					</div>
 					<div className="row">
 						<ConfirmOpEventList
-							title='Ethereum Delivery Service'
-							description='Init Token Transfer'
+							title='Init Token Transfer'
+							description='Ethereum Delivery Service'
 							events={this.props.eds.events.confirm.data} />
 						<ConfirmNeededEventList
-							title='Ethereum Delivery Service'
-							description='Confirmation Needed'
+							title='Confirmation Needed'
+							description='Ethereum Delivery Service'
 							events={this.props.eds.events.confirmNeeded.data} />
 					</div>
 					<div className="row">
 						<MultiTransactEventList
-							title='Ethereum Delivery Service'
-							description='Transaction Approved'
+							title='Transaction Approved'
+							description='Ethereum Delivery Service'
 							events={this.props.eds.events.multiTransact.data} />
 						<TokenTransferEventList
-							title='Ethereum Delivery Service'
-							description='Token Transfer'
+							title='Token Transfer'
+							description='Ethereum Delivery Service'
 							events={this.props.eds.events.transfer.data} />
 					</div>
 				</div>

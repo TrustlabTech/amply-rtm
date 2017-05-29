@@ -9,7 +9,8 @@ import {
   ConfirmNeededCard,
   MultiTransactCard,
   TokenTransferCard,
-} from './eds'
+} from './events'
+import { dedupeTxs } from '../libs/util'
 
 const commonPropTypes = {
   events: PropTypes.arrayOf(PropTypes.object).isRequired,
@@ -34,10 +35,11 @@ RecordEventList.propTypes = {
 
 export class ConfirmOpEventList extends Component {
   render() {
+    const data = dedupeTxs(this.props.events.reverse())
     return (
       <ListContainer {...this.props}>
         {
-          this.props.events.reverse().map(e => {
+          data.map(e => {
             return <ConfirmOpCard key={e.transactionHash} eventLog={e} />
           })
         }
