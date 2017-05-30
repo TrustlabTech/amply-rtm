@@ -11,7 +11,10 @@ export default class Sidebar extends Component {
           <div className="left_col scroll-view">
             
             <div className="navbar nav_title" style={{ border: 0 }}>
-              <Link to='/' className="site_title"><i className="fa fa-paw"></i> <span>Amply Dashboard</span></Link>
+              <image src='/images/amply_icon_white.png' width="64" height="64" />
+              <Link to='/' className="site_title">
+                <span>Amply Dashboard</span>
+              </Link>
             </div>
 
             <div className="clearfix"></div>

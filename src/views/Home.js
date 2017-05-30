@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import React, { Component } from 'react'
 import Layout from './common/Layout'
+import { improveUI } from '../libs/util'
 import { CreateDIDEventList, } from '../components/EISEventsList'
 import { BlockNumber, TransactionsCount } from '../components/overview'
 import {
@@ -16,6 +17,10 @@ import {
 import { FUNDER_ADDRESS, SYSTEM_ADDRESS, ASSURANCE_ADDRESS } from '../const'
 
 class Home extends Component {
+	componentDidMount() {
+    improveUI()
+  }
+
   render() {
     return (
 			<Layout>

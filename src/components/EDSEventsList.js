@@ -21,7 +21,7 @@ export class RecordEventList extends Component {
     return (
       <ListContainer {...this.props}>
         {
-          this.props.events.reverse().map(e => {
+          this.props.events.sort((a, b) => a.blockNumber < b.blockNumber).map(e => {
             return <RecordCard key={e.transactionHash} eventLog={e} />
           })
         }
@@ -35,7 +35,7 @@ RecordEventList.propTypes = {
 
 export class ConfirmOpEventList extends Component {
   render() {
-    const data = dedupeTxs(this.props.events.reverse())
+    const data = dedupeTxs(this.props.events).sort((a, b) => a.blockNumber < b.blockNumber)
     return (
       <ListContainer {...this.props}>
         {
@@ -56,7 +56,7 @@ export class ConfirmNeededEventList extends Component {
     return (
       <ListContainer {...this.props}>
         {
-          this.props.events.reverse().map(e => {
+          this.props.events.sort((a, b) => a.blockNumber < b.blockNumber).map(e => {
             return <ConfirmNeededCard key={e.transactionHash} eventLog={e} />
           })
         }
@@ -73,7 +73,7 @@ export class MultiTransactEventList extends Component {
     return (
       <ListContainer {...this.props}>
         {
-          this.props.events.reverse().map(e => {
+          this.props.events.sort((a, b) => a.blockNumber < b.blockNumber).map(e => {
             return <MultiTransactCard key={e.transactionHash} eventLog={e} />
           })
         }
@@ -90,7 +90,7 @@ export class TokenTransferEventList extends Component {
     return (
       <ListContainer {...this.props}>
         {
-          this.props.events.reverse().map(e => {
+          this.props.events.sort((a, b) => a.blockNumber < b.blockNumber).map(e => {
             return <TokenTransferCard key={e.transactionHash} eventLog={e} />
           })
         }

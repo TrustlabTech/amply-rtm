@@ -11,6 +11,7 @@ import {
 
 import Home from  './views/Home'
 import Contracts from './views/Contracts'
+import Statistics from './views/Statistics'
 
 import EIS from './libs/events/eis'
 import EDS from './libs/events/eds'
@@ -71,6 +72,7 @@ class Root extends Component {
       <Router history={browserHistory}>
         <Route path='/' component={Home} />
         <Route path='/contracts' component={Contracts} />
+        <Route path='/statistics' component={Statistics} />
       </Router>
     )
   }

@@ -1,12 +1,11 @@
 'use-strict'
 
-import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
 import React, { Component } from 'react'
 
 import Layout from './common/Layout'
 import Token from '../components/queries/Token'
 import Registry from '../components/queries/Registry'
+import { improveUI } from '../libs/util'
 import { BlockNumber, TransactionsCount } from '../components/overview'
 import { FUNDER_ADDRESS, SYSTEM_ADDRESS, ASSURANCE_ADDRESS } from '../const'
 
@@ -40,42 +39,22 @@ const init = async () => {
   return instances
 }
 
-const bindJQuery = () => {
-  $('.collapse-link').on('click', function() {
-    var $BOX_PANEL = $(this).closest('.x_panel'),
-        $ICON = $(this).find('i'),
-        $BOX_CONTENT = $BOX_PANEL.find('.x_content');
-    
-    // fix for some div with hardcoded fix class
-    if ($BOX_PANEL.attr('style')) {
-        $BOX_CONTENT.slideToggle(200, function(){
-            $BOX_PANEL.removeAttr('style');
-        });
-    } else {
-        $BOX_CONTENT.slideToggle(200); 
-        $BOX_PANEL.css('height', 'auto');  
-    }
-
-    $ICON.toggleClass('fa-chevron-up fa-chevron-down');
-  });
-}
-
-class Contracts extends Component {
+export default class Contracts extends Component {
   constructor(props) {
     super(props)
 
     this.state = {
       contracts: {
-        Token: null,
-        Registry: null,
-        DeliveryService: null,
+        Token: {},
+        Registry: {},
+        DeliveryService: {},
       }
     }
   }
 
   componentDidMount() {
     this.getContracts()
-    bindJQuery()
+    improveUI()
   }
 
   async getContracts() {
@@ -91,18 +70,6 @@ class Contracts extends Component {
   }
 
   render() {
-    const tokenInterface = this.state.contracts.Token ? (
-      <div className="row">
-        <Token Token={this.state.contracts.Token} />
-      </div>
-    ) : null
-    
-    const registryInterface = this.state.contracts.Registry ? (
-      <div className="row">
-        <Registry Registry={this.state.contracts.Registry} />
-      </div>
-    ) : null
-
     return (
       <Layout>
         <div className="right_col" role="main">
@@ -113,16 +80,15 @@ class Contracts extends Component {
 						<TransactionsCount eth={web3.eth} faClass='fa fa-file-text' titleTop='Assurance' titleBottom='Transactions' address={ASSURANCE_ADDRESS} />
 					</div>
           
-          {tokenInterface}
-          {registryInterface}
+          <div className="row">
+            <Token Token={this.state.contracts.Token} />
+          </div>
+          <div className="row">
+            <Registry Registry={this.state.contracts.Registry} />
+          </div>
 
         </div>
       </Layout>
     )
   }
 }
-
-Contracts.propTypes = {
-}
-
-export default connect()(Contracts)

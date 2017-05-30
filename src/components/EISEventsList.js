@@ -9,7 +9,7 @@ export class CreateDIDEventList extends Component {
     return (
       <ListContainer {...this.props} >
         {
-          this.props.events.reverse().map(e => {
+          this.props.events.sort((a, b) => a.blockNumber < b.blockNumber).map(e => {
             return (
               <CreateDIDCard key={e.transactionHash} eventLog={e} />
           )})
