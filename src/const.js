@@ -1,4 +1,4 @@
-export const GETH_HOST = 'http://104.198.27.148:8545'
+export const GETH_HOST = 'http://nodes-tx1.amply.tech:8545'
 
 export const FUNDER_ADDRESS = '0x5C0BdA0234FDb5a4EF625FfFEc52184743E49C93'
           ,  SYSTEM_ADDRESS = '0x7660efCd4f31E836936c83D323A784C8E93Ae920'

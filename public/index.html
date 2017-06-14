@@ -21,47 +21,47 @@
     <link href="/assets/css/custom.min.css" rel="stylesheet">
 	</head>
 	<body class="nav-md">
-		
+
 		<div id="amply" class="container body"></div>
-		<!-- Scripts -->
-		<!-- jQuery -->
-    <script src="/assets/js/jquery.min.js"></script>
-    <!-- Bootstrap -->
-    <script src="/assets/js/bootstrap.min.js"></script>
-    <!-- FastClick -->
-    <script src="/assets/js/fastclick.js"></script>
-    <!-- NProgress -->
-    <script src="/assets/js/nprogress.js"></script>
-    <script>
-      (function($,sr){
-        // debouncing function from John Hann
-        // http://unscriptable.com/index.php/2009/03/20/debouncing-javascript-methods/
-        var debounce = function (func, threshold, execAsap) {
-          var timeout;
+        <!-- Scripts -->
+        <!-- jQuery -->
+        <script src="/assets/js/jquery.min.js"></script>
+        <!-- Bootstrap -->
+        <script src="/assets/js/bootstrap.min.js"></script>
+        <!-- FastClick -->
+        <script src="/assets/js/fastclick.js"></script>
+        <!-- NProgress -->
+        <script src="/assets/js/nprogress.js"></script>
+        <script>
+        (function($,sr){
+            // debouncing function from John Hann
+            // http://unscriptable.com/index.php/2009/03/20/debouncing-javascript-methods/
+            var debounce = function (func, threshold, execAsap) {
+            var timeout;
 
-            return function debounced () {
-                var obj = this, args = arguments;
-                function delayed () {
-                    if (!execAsap)
-                        func.apply(obj, args); 
-                    timeout = null; 
-                }
+                return function debounced () {
+                    var obj = this, args = arguments;
+                    function delayed () {
+                        if (!execAsap)
+                            func.apply(obj, args); 
+                        timeout = null; 
+                    }
 
-                if (timeout)
-                    clearTimeout(timeout);
-                else if (execAsap)
-                    func.apply(obj, args);
+                    if (timeout)
+                        clearTimeout(timeout);
+                    else if (execAsap)
+                        func.apply(obj, args);
 
-                timeout = setTimeout(delayed, threshold || 100); 
+                    timeout = setTimeout(delayed, threshold || 100); 
+                };
             };
-        };
 
-        // smartresize 
-        jQuery.fn[sr] = function(fn){  return fn ? this.bind('resize', debounce(fn)) : this.trigger(sr); };
+            // smartresize 
+            jQuery.fn[sr] = function(fn){  return fn ? this.bind('resize', debounce(fn)) : this.trigger(sr); };
 
-      })(jQuery,'smartresize');
-    </script>
-		<!-- React App -->
-		<script src="/assets/js/bundle.min.js?v=1.1"></script>
+        })(jQuery,'smartresize');
+        </script>
+        <!-- React App -->
+        <script src="/assets/js/bundle.min.js?v=1.2"></script>
 	</body>
 </html>
